@@ -43,10 +43,6 @@ splitData.forEach((game) => {
   } else if (them === 'A' && me === 'Y') {
     // win
     roundScore = roundScore + 6;
-  } else if (them === 'A' && me === 'Z') {
-    // loss
-  } else if (them === 'B' && me === 'X') {
-    // loss
   } else if (them === 'B' && me === 'Y') {
     // draw
     roundScore = roundScore + 3;
@@ -56,8 +52,6 @@ splitData.forEach((game) => {
   } else if (them === 'C' && me === 'X') {
     // win
     roundScore = roundScore + 6;
-  } else if (them === 'C' && me === 'Y') {
-    // loss
   } else if (them === 'C' && me === 'Z') {
     // draw
     roundScore = roundScore + 3;
