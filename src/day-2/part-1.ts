@@ -1,8 +1,5 @@
 import { readInput } from "../utils/readInput";
 
-const input = readInput(__dirname);
-const splitData: string[] = input.split(/\n/);
-
 /**
  * Notes:
  * a = rock
@@ -22,13 +19,16 @@ const splitData: string[] = input.split(/\n/);
  * win = 6 pt
  */
 
+const input = readInput(__dirname);
+const splitData: string[] = input.split(/\n/);
+
 const choicePoints: Record<string, number> = {
   'X': 1,
   'Y': 2,
   'Z': 3
 };
 
-const outcomes: Record<string, number> = {
+const gameOutcome: Record<string, number> = {
   'AX': 3,
   'BY': 3,
   'CZ': 3,
@@ -41,7 +41,7 @@ let totalScore = 0;
 
 splitData.forEach((game) => {
   const [them, me] = game.split(' ');
-  totalScore = totalScore + choicePoints[me] + (outcomes[`${them}${me}`] || 0);
+  totalScore = totalScore + choicePoints[me] + (gameOutcome[`${them}${me}`] || 0);
 });
 
 // correct answer: 12156

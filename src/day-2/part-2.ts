@@ -14,55 +14,35 @@ import { readInput } from "../utils/readInput";
 const input = readInput(__dirname);
 const splitData: string[] = input.split(/\n/);
 
+const resultPoints: Record<string, number> = {
+  'X': 0, // loss
+  'Y': 3, // draw
+  'Z': 6, // win
+}
+
+const outcomes: Record<string, Record<string, number>> = {
+  'X': {
+    'A': 3,
+    'B': 1,
+    'C': 2,
+  },
+  'Y': {
+    'A': 1,
+    'B': 2,
+    'C': 3,
+  },
+  'Z': {
+    'A': 2,
+    'B': 3,
+    'C': 1,
+  }
+}
+
 let totalScore = 0;
 
 splitData.forEach((game) => {
   const [them, result] = game.split(' ');
-  let roundScore = 0;
-
-  if (result === 'X') {
-    // loss
-    if (them === 'A') {
-      // scissors
-      roundScore = roundScore + 3;
-    } else if (them === 'B') {
-      // rock
-      roundScore = roundScore + 1;
-    } else if (them === 'C') {
-      // paper
-      roundScore = roundScore + 2;
-    }
-  } else if (result === 'Y') {
-    // draw
-    roundScore = roundScore + 3;
-
-    if (them === 'A') {
-      // rock
-      roundScore = roundScore + 1;
-    } else if (them === 'B') {
-      // paper
-      roundScore = roundScore + 2;
-    } else if (them === 'C') {
-      // scissors
-      roundScore = roundScore + 3;
-    }
-  } else if (result === 'Z') {
-    // win
-    roundScore = roundScore + 6;
-
-    if (them === 'A') {
-      // paper
-      roundScore = roundScore + 2;
-    } else if (them === 'B') {
-      // scissors
-      roundScore = roundScore + 3;
-    } else if (them === 'C') {
-      // rock
-      roundScore = roundScore + 1;
-    }
-  }
-
-  totalScore = totalScore + roundScore;
+  totalScore = totalScore + resultPoints[result] + outcomes[result][them];
 });
 
 // correct answer: 10835
