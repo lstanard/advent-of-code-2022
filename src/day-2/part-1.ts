@@ -22,42 +22,27 @@ const splitData: string[] = input.split(/\n/);
  * win = 6 pt
  */
 
+const choicePoints: Record<string, number> = {
+  'X': 1,
+  'Y': 2,
+  'Z': 3
+};
+
+const outcomes: Record<string, number> = {
+  'AX': 3,
+  'BY': 3,
+  'CZ': 3,
+  'AY': 6,
+  'BZ': 6,
+  'CX': 6
+}
+
 let totalScore = 0;
+
 splitData.forEach((game) => {
   const [them, me] = game.split(' ');
-  let roundScore = 0;
-
-  // tally points from which choice I made
-  if (me === 'Z') {
-    roundScore = roundScore + 3;
-  } else if (me === 'Y') {
-    roundScore = roundScore + 2;
-  } else if (me === 'X') {
-    roundScore = roundScore + 1;
-  }
-  
-  // determine who won the match
-  if (them === 'A' && me === 'X') {
-    // draw
-    roundScore = roundScore + 3;
-  } else if (them === 'A' && me === 'Y') {
-    // win
-    roundScore = roundScore + 6;
-  } else if (them === 'B' && me === 'Y') {
-    // draw
-    roundScore = roundScore + 3;
-  } else if (them === 'B' && me === 'Z') {
-    // win
-    roundScore = roundScore + 6;
-  } else if (them === 'C' && me === 'X') {
-    // win
-    roundScore = roundScore + 6;
-  } else if (them === 'C' && me === 'Z') {
-    // draw
-    roundScore = roundScore + 3;
-  }
-
-  totalScore = totalScore + roundScore;
+  totalScore = totalScore + choicePoints[me];
+  totalScore = totalScore + (outcomes[`${them}${me}`] || 0);
 });
 
 // correct answer: 12156

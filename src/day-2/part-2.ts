@@ -65,4 +65,5 @@ splitData.forEach((game) => {
   totalScore = totalScore + roundScore;
 });
 
+// correct answer: 10835
 console.log('totalScore', totalScore);
