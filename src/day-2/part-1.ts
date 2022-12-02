@@ -41,8 +41,7 @@ let totalScore = 0;
 
 splitData.forEach((game) => {
   const [them, me] = game.split(' ');
-  totalScore = totalScore + choicePoints[me];
-  totalScore = totalScore + (outcomes[`${them}${me}`] || 0);
+  totalScore = totalScore + choicePoints[me] + (outcomes[`${them}${me}`] || 0);
 });
 
 // correct answer: 12156
