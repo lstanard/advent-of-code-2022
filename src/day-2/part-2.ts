@@ -20,7 +20,7 @@ const resultPoints: Record<string, number> = {
   'Z': 6, // win
 }
 
-const outcomes: Record<string, Record<string, number>> = {
+const gameOutcome: Record<string, Record<string, number>> = {
   'X': {
     'A': 3,
     'B': 1,
@@ -42,7 +42,7 @@ let totalScore = 0;
 
 splitData.forEach((game) => {
   const [them, result] = game.split(' ');
-  totalScore = totalScore + resultPoints[result] + outcomes[result][them];
+  totalScore = totalScore + resultPoints[result] + gameOutcome[result][them];
 });
 
 // correct answer: 10835
