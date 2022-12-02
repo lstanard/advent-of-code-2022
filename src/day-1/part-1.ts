@@ -1,4 +1,7 @@
-// const fs = require('fs');
+const fs = require('fs');
+
+// https://stackoverflow.com/questions/35758584/cannot-redeclare-block-scoped-variable
+export {};
 
 try {
   const data = fs.readFileSync(`${__dirname}/input.txt`, 'utf8');
