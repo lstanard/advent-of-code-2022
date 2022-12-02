@@ -1,23 +1,18 @@
-const fs = require('fs');
+import { readInput } from "../utils/readInput";
 
-// https://stackoverflow.com/questions/35758584/cannot-redeclare-block-scoped-variable
-export {};
+const input = readInput(__dirname);
+const splitData: string[] = input.split(/\n\s*\n/);
 
-try {
-  const data = fs.readFileSync(`${__dirname}/input.txt`, 'utf8');
-  const splitData: string[] = data.split(/\n\s*\n/);
+const largestGroup = splitData.reduce((prevGroup, currGroup) => {
+  const prevGroupSum = prevGroup.split(/\n/).reduce((prev, curr) => Number(prev) + Number(curr), 0);
+  const currGroupSum = currGroup.split(/\n/).reduce((prev, curr) => Number(prev) + Number(curr), 0);
+  if (prevGroupSum > currGroupSum) {
+    return prevGroup;
+  }
+  return currGroup;
+});
 
-  const largestGroup = splitData.reduce((prevGroup, currGroup) => {
-    const prevGroupSum = prevGroup.split(/\n/).reduce((prev, curr) => Number(prev) + Number(curr), 0);
-    const currGroupSum = currGroup.split(/\n/).reduce((prev, curr) => Number(prev) + Number(curr), 0);
-    if (prevGroupSum > currGroupSum) {
-      return prevGroup;
-    }
-    return currGroup;
-  });
+const largestGroupSum = largestGroup.split(/\n/).reduce((prev, curr) => Number(prev) + Number(curr), 0);
 
-  const largestGroupSum = largestGroup.split(/\n/).reduce((prev, curr) => Number(prev) + Number(curr), 0);
-  console.log('largestGroupSum', largestGroupSum);
-} catch (err) {
-  console.error(err);
-}
+// correct answer: 68787
+console.log('largestGroupSum', largestGroupSum);

@@ -1,21 +1,16 @@
-const fs = require('fs');
+import { readInput } from "../utils/readInput";
 
-// https://stackoverflow.com/questions/35758584/cannot-redeclare-block-scoped-variable
-export {};
+const input = readInput(__dirname);
+const splitData: string[] = input.split(/\n\s*\n/);
 
-try {
-  const data = fs.readFileSync(`${__dirname}/input.txt`, 'utf8');
-  const splitData: string[] = data.split(/\n\s*\n/);
+const groupSumStore: number[] = [];
+splitData.forEach((group) => {
+  const groupSum = group.split(/\n/).reduce((prev, curr) => Number(prev) + Number(curr), 0);
+  groupSumStore.push(groupSum);
+});
 
-  const groupSumStore: number[] = [];
-  splitData.forEach((group) => {
-    const groupSum = group.split(/\n/).reduce((prev, curr) => Number(prev) + Number(curr), 0);
-    groupSumStore.push(groupSum);
-  });
+const sortedGroupSums = groupSumStore.sort((a, b) => b - a);
+const sumOfTopThree = sortedGroupSums.splice(0, 3).reduce((a, b) => a + b);
 
-  const sortedGroupSums = groupSumStore.sort((a, b) => b - a);
-  const sumOfTopThree = sortedGroupSums.splice(0, 3).reduce((a, b) => a + b);
-  console.log('sumOfTopThree', sumOfTopThree);
-} catch (err) {
-  console.error(err);
-}
+// correct answer: 198041
+console.log('sumOfTopThree', sumOfTopThree);
