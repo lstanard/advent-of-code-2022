@@ -1,12 +1,12 @@
 import { readInput } from "../utils/readInput";
 
-const alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+export const alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 
 export const getPart1Answer = (inputFile = 'input.txt') => {
   const input = readInput(__dirname, inputFile);
   const splitData: string[] = input.split(/\n/);
 
-  const priorityValues = splitData.map((fullContents) => {
+  return splitData.map((fullContents) => {
     const allValues = fullContents.split('');
     const half = Math.floor(allValues.length / 2)
     const leftHalf = allValues.slice(0, half);
@@ -20,7 +20,5 @@ export const getPart1Answer = (inputFile = 'input.txt') => {
       }
     }
     return commonValue;
-  });
-
-  return priorityValues.reduce((prev, curr) => prev + curr);
+  }).reduce((prev, curr) => prev + curr);
 }
