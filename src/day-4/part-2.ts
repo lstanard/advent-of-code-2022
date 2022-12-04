@@ -9,11 +9,9 @@ export const getPart2Answer = (inputFile = 'input.txt') => {
     const [oneStart, oneEnd] = one.split('-');
     const [twoStart, twoEnd] = two.split('-');
 
-    if ((Number(oneEnd) === Number(twoStart)) || (Number(twoEnd) === Number(oneStart))) {
-      collection.push(currPair);
-    } else if (Number(oneStart) <= Number(twoStart) && Number(oneEnd) >= Number(twoStart)) {
-      collection.push(currPair);
-    } else if (Number(twoStart) <= Number(oneStart) && Number(twoEnd) >= Number(oneStart)) {
+    if ((Number(oneEnd) === Number(twoStart)) || (Number(twoEnd) === Number(oneStart))
+        || (Number(oneStart) <= Number(twoStart) && Number(oneEnd) >= Number(twoStart))
+        || (Number(twoStart) <= Number(oneStart) && Number(twoEnd) >= Number(oneStart))) {
       collection.push(currPair);
     }
     return collection;
