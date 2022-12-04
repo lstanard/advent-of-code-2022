@@ -11,11 +11,8 @@ export const getPart2Answer = (inputFile = 'input.txt') => {
     const splitData = group.split(/\n/).map((str) => str.split('')).filter((s) => s.length);
 
     // find the common value
-    // @ts-ignore
-    const result = splitData.shift().filter(function(v) {
-      return splitData.every(function(a) {
-        return a.indexOf(v) !== -1;
-      });
+    const result = splitData.shift()!.filter((value) => {
+      return splitData.every((a) => a.indexOf(value) !== -1);
     })[0];
     return alphabet.indexOf(result) + 1;
   }).reduce((prev, curr) => prev + curr);

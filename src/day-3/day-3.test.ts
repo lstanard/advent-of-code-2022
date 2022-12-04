@@ -1,8 +1,7 @@
 import { getPart1Answer } from "./part-1";
 import { getPart2Answer } from './part-2';
-// import { getPart2Answer } from "./part-2";
 
-describe('Day 1', () => {
+describe('Day 3', () => {
   describe('Part 1', () => {  
     it('should return correct answer with sample input', () => {
       expect(getPart1Answer('sample-input.txt')).toEqual(157);
