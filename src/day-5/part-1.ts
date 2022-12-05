@@ -1,6 +1,6 @@
 import { readInput } from "../utils/readInput";
 
-export const getPart1Answer = (inputFile = 'input.txt') => {
+export const getPart1Answer = (inputFile = 'input.txt', reverseStacks = true) => {
   const input = readInput(__dirname, inputFile);
   const splitInput: string[] = input.split(/\n/);
   const emptyLine = splitInput.indexOf('');
@@ -9,7 +9,7 @@ export const getPart1Answer = (inputFile = 'input.txt') => {
   stacks.splice(stacks.length - 1, stacks.length);
   const moves = splitInput.slice(emptyLine + 1, splitInput.length);
 
-  const containers: (string|null)[][] = [];
+  const containers: string[][] = [];
   stacks.forEach((stack) => {
     const row = stack.match(/(\s{4}|\[.\])/g);
     row?.forEach((rowItem, index) => {
@@ -33,9 +33,9 @@ export const getPart1Answer = (inputFile = 'input.txt') => {
     const items = containers[sourceContainerIndex].splice(0, itemCount);
 
     if (containers[destContainerIndex]?.length) {
-      containers[destContainerIndex].unshift(...items.reverse());
+      containers[destContainerIndex].unshift(...(reverseStacks ? items.reverse() : items));
     } else {
-      containers[destContainerIndex] = items.reverse();
+      containers[destContainerIndex] = reverseStacks ? items.reverse() : items;
     }
   });
 
