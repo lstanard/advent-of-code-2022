@@ -40,12 +40,7 @@ export const getPart1Answer = (inputFile = 'input.txt') => {
   });
 
   return containers.map((container) => {
-    return container[0];
-  });
+    const letters = container[0]?.match(/([A-Z])/g);    
+    return letters?.join('');
+  }).join('');
 }
-
-// answer: CMZ
-// console.log(getPart1Answer('sample-input.txt'));
-
-// correct answer: TGWSMRBPN
-console.log(getPart1Answer());
