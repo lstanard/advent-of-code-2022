@@ -1,6 +1,10 @@
 import { readInput } from "../utils/readInput";
 
 /**
+ * This solution works for Part 1 & Part 2, with the only difference being the
+ * `reverseStacks` flag that toggles whether or not to reverse the order of the 
+ * items being added to their destination array.
+ * 
  * NOTE: Kind of want to try refactoring this into discreet functions
  */
 export const getPart1Answer = (inputFile = 'input.txt', reverseStacks = true) => {
