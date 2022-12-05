@@ -1,5 +1,8 @@
 import { readInput } from "../utils/readInput";
 
+/**
+ * NOTE: Kind of want to try refactoring this into discreet functions
+ */
 export const getPart1Answer = (inputFile = 'input.txt', reverseStacks = true) => {
   const input = readInput(__dirname, inputFile);
   const splitInput: string[] = input.split(/\n/);

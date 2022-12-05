@@ -1,5 +1,4 @@
 import { getPart1Answer } from "./part-1";
-// import { getPart2Answer } from './part-2';
 
 describe('Day 5', () => {
   describe('Part 1', () => {  
