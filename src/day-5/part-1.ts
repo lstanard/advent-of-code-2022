@@ -6,28 +6,46 @@ export const getPart1Answer = (inputFile = 'input.txt') => {
   const emptyLine = splitInput.indexOf('');
 
   const stacks = splitInput.slice(0, emptyLine);
-  const columns = stacks.slice(stacks.length - 1, stacks.length)[0].trim().split('').filter((v) => v.trim().length).length;
-  // console.log('columns', columns);
   stacks.splice(stacks.length - 1, stacks.length);
-  // console.log('stacks', stacks);
   const moves = splitInput.slice(emptyLine + 1, splitInput.length);
-  // console.log('moves', moves);
 
   const containers: (string|null)[][] = [];
   stacks.forEach((stack) => {
     const row = stack.match(/(\s{4}|\[.\])/g);
     row?.forEach((rowItem, index) => {
-      if (containers[index + 1]?.length) {
-        containers[index + 1].push(rowItem.trim() === '' ? null : rowItem);
-      } else {
-        containers[index + 1] = [rowItem.trim() === '' ? null : rowItem];
+      const trimmedRowItem = rowItem.trim();
+      if (trimmedRowItem !== '') {
+        if (containers[index]?.length) {
+          containers[index].push(rowItem);
+        } else {
+          containers[index] = [rowItem];
+        }
       }
     });
   });
 
-  console.log('containers', containers);
+  moves.forEach((move) => {
+    const [_1, count, _2, start, _3, end] = move.split(' ');
+    const itemCount = Number(count);
+    const sourceContainerIndex = Number(start) - 1;
+    const destContainerIndex = Number(end) - 1;
+    // splice off item(s) to be moved
+    const items = containers[sourceContainerIndex].splice(0, itemCount);
+
+    if (containers[destContainerIndex]?.length) {
+      containers[destContainerIndex].unshift(...items.reverse());
+    } else {
+      containers[destContainerIndex] = items.reverse();
+    }
+  });
+
+  return containers.map((container) => {
+    return container[0];
+  });
 }
 
 // answer: CMZ
-console.log(getPart1Answer('sample-input.txt'));
-// console.log(getPart1Answer());
+// console.log(getPart1Answer('sample-input.txt'));
+
+// correct answer: TGWSMRBPN
+console.log(getPart1Answer());
