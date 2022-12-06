@@ -5,12 +5,12 @@ const parseInput = (inputFile: string) => {
   return input;
 }
 
-export const getPart1Answer = (inputFile = 'input.txt') => {
+export const getAnswer = (inputFile = 'input.txt', packetLength = 3) => {
   const input = parseInput(inputFile);
   const chars = input.split('');
 
-  for (let index = 3; index < chars.length; index++) {
-    const prevElements = chars.slice(index - 3, index);
+  for (let index = packetLength; index < chars.length; index++) {
+    const prevElements = chars.slice(index - packetLength, index);
     const group = [chars[index], ...prevElements];
     const groupSet = new Set(group);
     if (groupSet.size === group.length) {
@@ -19,7 +19,8 @@ export const getPart1Answer = (inputFile = 'input.txt') => {
   }
 }
 
-// console.log(getPart1Answer('sample-input.txt'));
-
 // correct answer: 1816
-console.log(getPart1Answer());
+console.log(getAnswer());
+
+// correct answer: 2625
+console.log(getAnswer('input.txt', 13));
