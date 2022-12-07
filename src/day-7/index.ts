@@ -24,19 +24,23 @@ const getFileSizes = (input: string[]) => {
       fileSizes[path] = (fileSizes[path] ?? 0) + fileSizeNum;
     }
   }
-  
   return fileSizes;
 }
 
 export const getAnswer = (inputFile = 'input.txt', limit = 100000) => {
-  const input = parseInput(inputFile);
-  const fileSizesByDir = getFileSizes(input);
+  const fileSizesByDir = getFileSizes(parseInput(inputFile));
 
   Object.entries(fileSizesByDir).forEach(([dir, size]) => {
     const fullPath = dir.split(',');
+    console.log('fullPath', fullPath);
+    console.log('size', size);
     if (fullPath.length > 1) {
-      const parentPath = fullPath.splice(0, fullPath.length - 1).join();
-      fileSizesByDir[parentPath] = fileSizesByDir[parentPath] + size;
+      const parentPath = fullPath.splice(0, fullPath.length - 1);
+      parentPath.forEach((subDir) => {
+        
+      });
+      // console.log('parentPath', parentPath);
+      // fileSizesByDir[parentPath] = fileSizesByDir[parentPath] + size;
     }
   });
 
