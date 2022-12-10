@@ -29,23 +29,29 @@ const getFileSizes = (input: string[]) => {
 
 export const getAnswer = (inputFile = 'input.txt', limit = 100000) => {
   const fileSizesByDir = getFileSizes(parseInput(inputFile));
+  const totalFileSizes: Record<string, number> = {};
+  console.log('fileSizesByDir', fileSizesByDir);
 
   Object.entries(fileSizesByDir).forEach(([dir, size]) => {
     const fullPath = dir.split(',');
-    console.log('fullPath', fullPath);
-    console.log('size', size);
+
     if (fullPath.length > 1) {
-      const parentPath = fullPath.splice(0, fullPath.length - 1);
-      parentPath.forEach((subDir) => {
-        
-      });
-      // console.log('parentPath', parentPath);
-      // fileSizesByDir[parentPath] = fileSizesByDir[parentPath] + size;
+      while (fullPath.length > 0) {
+        fullPath.pop();
+        const parentPath = fullPath.join();
+        totalFileSizes[parentPath] = (totalFileSizes[parentPath] ?? 0) + size;
+      }
     }
   });
 
-  return fileSizesByDir;
+  console.log('totalFileSizes', totalFileSizes);
+
+  return Object.values(fileSizesByDir)
+    .filter((value) => value <= limit)
+    .reduce((prev, curr) => prev + curr);
 }
 
-// console.log(getAnswer());
-console.log(getAnswer('sample-input.txt'));
+// first attempt: 807127 (too low), 1438895 (too high)
+console.log(getAnswer());
+
+// console.log(getAnswer('sample-input.txt'));
